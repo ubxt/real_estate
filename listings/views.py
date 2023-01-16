@@ -1,3 +1,8 @@
 from django.shortcuts import render
+from .models import Listing
 
-# Create your views here.
+
+def listing_list(request):
+    queryset = Listing.objects.all()
+    context = {"listings": queryset}
+    return render(request=request, template_name="listings.html", context=context)
