@@ -17,7 +17,7 @@ def listing_retrieve(request, pk):
 
 def listing_create(request):
     if request.method == "POST":
-        form = ListingForm(request.POST)
+        form = ListingForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect("/listings")
@@ -31,7 +31,7 @@ def listing_create(request):
 def listing_update(request, pk):
     listing = Listing.objects.get(pk=pk)
     if request.method == "POST":
-        form = ListingForm(request.POST, instance=listing)
+        form = ListingForm(request.POST, request.FILES, instance=listing)
         if form.is_valid():
             form.save()
             return redirect("/listings")
